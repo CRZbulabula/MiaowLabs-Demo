@@ -1,6 +1,9 @@
 --cpu Cortex-M3
 "miaowlabs-demo\startup_stm32f103xb.o"
 "miaowlabs-demo\main.o"
+"miaowlabs-demo\gpio.o"
+"miaowlabs-demo\tim.o"
+"miaowlabs-demo\usart.o"
 "miaowlabs-demo\stm32f1xx_it.o"
 "miaowlabs-demo\stm32f1xx_hal_msp.o"
 "miaowlabs-demo\stm32f1xx_hal_gpio_ex.o"
@@ -16,6 +19,7 @@
 "miaowlabs-demo\stm32f1xx_hal_flash.o"
 "miaowlabs-demo\stm32f1xx_hal_flash_ex.o"
 "miaowlabs-demo\stm32f1xx_hal_exti.o"
+"miaowlabs-demo\stm32f1xx_hal_uart.o"
 "miaowlabs-demo\system_stm32f1xx.o"
 --library_type=microlib --strict --scatter "MiaowLabs-Demo\MiaowLabs-Demo.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
