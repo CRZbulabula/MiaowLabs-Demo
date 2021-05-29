@@ -186,36 +186,7 @@ void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
-	g_nMainEventCount++;
-
-  g_nSpeedControlPeriod++;
-  SpeedControlOutput();
-
-  if (g_nMainEventCount >= 5) {
-    // Reset and capture pulses every 5ms
-    g_nMainEventCount = 0;
-    GetMotorPulse();
-  } else if (g_nMainEventCount == 1) {
-    // The 1-th ms gets MPU-6050 data and calculate angle
-    GetMpuData();
-    AngleCalculate(); 
-  } else if (g_nMainEventCount == 2) {
-    // The 2-th ms is for angle control
-    AngleControl();
-  } else if (g_nMainEventCount == 3) {
-    // The 3-th ms is for speed control
-    g_nSpeedControlCount++;
-    if (g_nSpeedControlCount >= 5) {
-      // Do speed control every 25ms
-      SpeedControl();
-      g_nSpeedControlCount = 0;
-      g_nSpeedControlPeriod = 0;
-    }
-  } else if (g_nMainEventCount == 4) { 
-    // The 4-th ms output motor
-    MotorOutput();
-  }
-
+  BalanceControl();
   ButtonScan();
 	
   /* USER CODE END SysTick_IRQn 0 */

@@ -21,5 +21,6 @@ void MotorOutput(void);
 void AngleControl(void);
 void SpeedControl(void);
 void SpeedControlOutput(void);
+void BalanceControl(void);
 
 #endif
