@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -66,7 +67,8 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	//short accx, accy, accz;
+	//short gyrox, gyroy, gyroz;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -89,26 +91,37 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM3_Init();
+  MX_I2C1_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);// Turn on TIM3_CH1's PWM output
-	HAL_GPIO_WritePin(AIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init AIN1 to low level
-	HAL_GPIO_WritePin(AIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init AIN2 to high level
-	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);// Turn on TIM3_CH2's PWM output
-	HAL_GPIO_WritePin(BIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init BIN1 to low level
-	HAL_GPIO_WritePin(BIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init BIN2 to high level
-  /* USER CODE END 2 */
+	
+	// HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);// Turn on TIM3_CH1's PWM output
+	// HAL_GPIO_WritePin(AIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init AIN1 to low level
+	// HAL_GPIO_WritePin(AIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init AIN2 to high level
+	// HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);// Turn on TIM3_CH2's PWM output
+	// HAL_GPIO_WritePin(BIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init BIN1 to low level
+	// HAL_GPIO_WritePin(BIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init BIN2 to high level
+  
+	//if (!MPU_Init()) {
+		//printf("MPU-6050 Init Successfully");
+	//}
+	
+	/* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		printf("LED GPIO PIN!\n");
-		HAL_Delay(500);
-		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		printf("LED GPIO PIN!\n");
-		HAL_Delay(500);
-    /* USER CODE END WHILE */
+		// HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+		// printf("LED GPIO PIN!\n");
+		// HAL_Delay(500);
+		// HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+		// printf("LED GPIO PIN!\n");
+		// HAL_Delay(500);
+    
+		//MPU_Get_Accelerometer();
+		
+		/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
