@@ -106,17 +106,26 @@ void MotorOutput(void)
 	SetMotorVoltageAndDirection((int)g_fLeftMotorOut,(int)g_fRightMotorOut);
 }
 
-
 int SpeedInnerControl(int nPulse, int nTarget, int nPwm, int nErrorPrev)
 {
 	int nError;
 	float fP = 10.0, fI = 0.9;
+	
 	nError = nPulse - nTarget;
+	
 	nPwmBais = fP * (nError - nErrorPrev) + fI * nError;
+	
 	nErrorPrev = nError;
+	
 	nPwm += nPwmBais;
+	
 	if(nPwm > MOTOR_OUT_MAX) nPwm = MOTOR_OUT_MAX;
 	if(nPwm < MOTOR_OUT_MIN) nPwm = MOTOR_OUT_MIN;
+
+	//OutData[0] = (float) nPulse; // Real speed
+	//OutData[1] = (float) nTarget; // Target speed
+	//OutData[2] = (float) nPwm; // Output PWM
+
 	return nPwm;
 }
 
