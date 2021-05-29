@@ -1,5 +1,10 @@
 --cpu Cortex-M3
 "miaowlabs-demo\startup_stm32f103xb.o"
+"miaowlabs-demo\mpu6050.o"
+"miaowlabs-demo\button.o"
+"miaowlabs-demo\filter.o"
+"miaowlabs-demo\control.o"
+"miaowlabs-demo\outputdata.o"
 "miaowlabs-demo\main.o"
 "miaowlabs-demo\gpio.o"
 "miaowlabs-demo\i2c.o"

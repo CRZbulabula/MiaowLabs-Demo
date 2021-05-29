@@ -32,6 +32,10 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "button.h"
+#include "mpu6050.h"
+#include "control.h"
+#include "outputdata.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -67,7 +71,7 @@ void Error_Handler(void);
 #define AIN2_GPIO_Port GPIOB
 #define LED_Pin GPIO_PIN_12
 #define LED_GPIO_Port GPIOB
-#define Button_Pin GPIO_PIN_11
+#define Button_Pin GPIO_PIN_8
 #define Button_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
