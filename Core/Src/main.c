@@ -116,12 +116,32 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		if (g_iButtonState == 1) {
+		/*if (g_iButtonState == 1) {
 			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 			printf("LED GPIO TOGGLE! \n");
 		}
     
-		OutPut_Data();
+		OutPut_Data();*/
+
+    int STOP = 2000;
+		HAL_Delay(STOP);
+		printf("Turn\n");
+    Move(100);
+		printf("STOP\n");
+		HAL_Delay(STOP + 1000);
+		printf("Turn\n");
+    Move(-100);
+		printf("STOP\n");
+		HAL_Delay(STOP);
+    printf("Turn\n");
+    Turn(-90);
+    printf("STOP\n");
+    HAL_Delay(STOP + 1000);
+    printf("Turn\n");
+    Turn(90);
+    printf("STOP\n");
+    HAL_Delay(STOP);
+		
 		//MPU_Get_Accelerometer();
 		
     /* USER CODE END WHILE */
