@@ -122,7 +122,7 @@ int main(void)
 		}
     
 		OutPut_Data();*/
-
+		
     int STOP = 2000;
 		HAL_Delay(STOP);
 		printf("Turn\n");
@@ -141,6 +141,22 @@ int main(void)
     Turn(90);
     printf("STOP\n");
     HAL_Delay(STOP);
+		
+		/*
+		int La = HAL_GPIO_ReadPin(La_GPIO_Port, La_Pin);
+		int Lb = HAL_GPIO_ReadPin(Lb_GPIO_Port, Lb_Pin);
+		int Ra = HAL_GPIO_ReadPin(Ra_GPIO_Port, Ra_Pin);
+		int Rb = HAL_GPIO_ReadPin(Rb_GPIO_Port, Rb_Pin);
+		printf("Lb = %d\n", Lb);
+		printf("Rb = %d\n", Rb);
+		if (Lb == GPIO_PIN_RESET) {
+			printf("LLLL\n");
+		}
+		if (Rb == GPIO_PIN_RESET) {
+			printf("RRRR\n");
+		}
+		HAL_Delay(500);
+		*/
 		
 		//MPU_Get_Accelerometer();
 		

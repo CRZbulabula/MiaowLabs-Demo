@@ -7,7 +7,7 @@ int iButtonFlag; // Button reset mark, 1 represents reset
 int g_iButtonState; // Button state, global variable, 1 pressed, 0 released
 
 void ButtonScan(void) {
-	if (HAL_GPIO_ReadPin(Button_GPIO_Port, Button_Pin) == GPIO_PIN_RESET) {
+	if (HAL_GPIO_ReadPin(GPIOA, Rb_Pin) == GPIO_PIN_RESET) {
 		iButtonCount++;
 		
 		// If button pressed over 30ms

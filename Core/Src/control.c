@@ -60,6 +60,9 @@ float g_fSpeedControlOut, g_fSpeedControlOutNew, g_fSpeedControlOutOld;
 
 int MOVE_CONTROL = 0;
 int TURN_CONTROL = 0;
+int INFRARED_CONTROL = 0;
+// INFRARED Pin
+int La, Lb, Ra, Rb;
 
 float CAR_LEFT_SPEED_SET = 0;
 float CAR_RIGHT_SPEED_SET = 0;
@@ -109,6 +112,22 @@ void Turn(float angle)
 		continue;
 	}
 	TURN_CONTROL = 0;
+}
+
+void InfraredMove()
+{
+	CAR_LEFT_SPEED_SET = CAR_RIGHT_SPEED_SET = MOVE_START_SPEED;
+	INFRARED_CONTROL = 1;
+	while (fabs(CAR_LEFT_SPEED_SET) > 0.05) {
+		HAL_Delay(50);
+		// read pin data
+		La = HAL_GPIO_ReadPin(La_GPIO_Port, La_Pin);
+		Lb = HAL_GPIO_ReadPin(Lb_GPIO_Port, Lb_Pin);
+		Ra = HAL_GPIO_ReadPin(Ra_GPIO_Port, Ra_Pin);
+		Rb = HAL_GPIO_ReadPin(Rb_GPIO_Port, Rb_Pin);
+		continue;
+	}
+	INFRARED_CONTROL = 0;
 }
 
 void GetMotorPulse(void)
@@ -350,6 +369,11 @@ void SpeedOuterControl(void)
 			CAR_RIGHT_SPEED_SET -= 0.25;
 		}
 	}
+
+	// hongwai control
+	//if (honwai) {
+	//	if LA()
+	//}
 
 	fLeftDelta = CAR_LEFT_SPEED_SET - g_fCarLeftSpeed;
 	g_fCarLeftPosition += fLeftDelta;

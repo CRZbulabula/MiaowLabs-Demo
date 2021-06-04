@@ -66,14 +66,22 @@ void Error_Handler(void);
 #define BIN1_GPIO_Port GPIOA
 #define BIN2_Pin GPIO_PIN_4
 #define BIN2_GPIO_Port GPIOA
+#define La_Pin GPIO_PIN_5
+#define La_GPIO_Port GPIOA
 #define AIN1_Pin GPIO_PIN_0
 #define AIN1_GPIO_Port GPIOB
 #define AIN2_Pin GPIO_PIN_1
 #define AIN2_GPIO_Port GPIOB
 #define LED_Pin GPIO_PIN_12
 #define LED_GPIO_Port GPIOB
-#define Button_Pin GPIO_PIN_8
-#define Button_GPIO_Port GPIOA
+#define Rb_Pin GPIO_PIN_8
+#define Rb_GPIO_Port GPIOA
+#define Ra_Pin GPIO_PIN_15
+#define Ra_GPIO_Port GPIOA
+#define Lb_Pin GPIO_PIN_3
+#define Lb_GPIO_Port GPIOB
+#define LaB5_Pin GPIO_PIN_5
+#define LaB5_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
