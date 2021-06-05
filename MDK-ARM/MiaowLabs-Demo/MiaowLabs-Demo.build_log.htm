@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: μVision V5.34.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Shuwen Zheng, Tsinghua University, LIC=----
+License Information: 冠宇 伍, 清华大学, LIC=65ISZ-J6L5P-WF1I7-E9LXH-1MV3B-QF9EH
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.34.0.0
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Plus  Version: 5.34.0.0
+Toolchain Path:  d:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
 Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
@@ -25,30 +25,24 @@ C:\Users\Zheng\STM32CubeProjects\MiaowLabs-Demo\MDK-ARM\MiaowLabs-Demo.uvprojx
 Project File Date:  05/20/2021
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'MiaowLabs-Demo'
-assembling startup_stm32f103xb.s...
-compiling stm32f1xx_hal_tim.c...
-compiling stm32f1xx_hal_tim_ex.c...
-compiling stm32f1xx_hal_gpio_ex.c...
-compiling stm32f1xx_it.c...
-compiling main.c...
-compiling stm32f1xx_hal_msp.c...
-compiling stm32f1xx_hal.c...
-compiling stm32f1xx_hal_cortex.c...
-compiling stm32f1xx_hal_rcc_ex.c...
-compiling stm32f1xx_hal_flash.c...
-compiling stm32f1xx_hal_pwr.c...
-compiling stm32f1xx_hal_gpio.c...
-compiling stm32f1xx_hal_dma.c...
-compiling stm32f1xx_hal_rcc.c...
-compiling system_stm32f1xx.c...
-compiling stm32f1xx_hal_exti.c...
-compiling stm32f1xx_hal_flash_ex.c...
+compiling control.c...
+../Core/Inc/filter.h(6): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Inc/control.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Inc/button.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Core\Src\control.c(95): warning:  #223-D: function "printf" declared implicitly
+  		printf("%.4f %.4f %.4f\n", CAR_DISTANCE_SET, CAR_LEFT_SPEED_SET, g_fCarLeftSpeed);
+..\Core\Src\control.c(443): warning:  #1-D: last line of file ends without a newline
+  }
+..\Core\Src\control.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=1842 RO-data=286 RW-data=16 ZI-data=1024  
+Program Size: Code=16816 RO-data=456 RW-data=264 ZI-data=1392  
 FromELF: creating hex file...
-"MiaowLabs-Demo\MiaowLabs-Demo.axf" - 0 Error(s), 0 Warning(s).
+"MiaowLabs-Demo\MiaowLabs-Demo.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -71,7 +65,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:11
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

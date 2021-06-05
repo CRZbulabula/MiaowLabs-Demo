@@ -19,6 +19,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "i2c.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,7 +67,6 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -83,7 +86,29 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART1_UART_Init();
+  MX_TIM3_Init();
+  MX_I2C1_Init();
+  MX_TIM4_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+	
+	// HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);// Turn on TIM3_CH1's PWM output
+	// HAL_GPIO_WritePin(AIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init AIN1 to low level
+	// HAL_GPIO_WritePin(AIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init AIN2 to high level
+	// HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);// Turn on TIM3_CH2's PWM output
+	// HAL_GPIO_WritePin(BIN1_GPIO_Port, BIN1_Pin, GPIO_PIN_SET);// Init BIN1 to low level
+	// HAL_GPIO_WritePin(BIN2_GPIO_Port, BIN2_Pin, GPIO_PIN_RESET);// Init BIN2 to high level
+  
+	if (!MPU_Init()) {
+		printf("MPU-6050 Init Successfully\n");
+	}
+	
+  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 
   /* USER CODE END 2 */
 
@@ -91,6 +116,50 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		/*if (g_iButtonState == 1) {
+			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			printf("LED GPIO TOGGLE! \n");
+		}
+    
+		OutPut_Data();*/
+		
+    int STOP = 2000;
+		HAL_Delay(STOP);
+		printf("Turn\n");
+    Move(100);
+		printf("STOP\n");
+		HAL_Delay(STOP + 1000);
+		printf("Turn\n");
+    Move(-100);
+		printf("STOP\n");
+		HAL_Delay(STOP);
+    printf("Turn\n");
+    Turn(-90);
+    printf("STOP\n");
+    HAL_Delay(STOP + 1000);
+    printf("Turn\n");
+    Turn(90);
+    printf("STOP\n");
+    HAL_Delay(STOP);
+		
+		/*
+		int La = HAL_GPIO_ReadPin(La_GPIO_Port, La_Pin);
+		int Lb = HAL_GPIO_ReadPin(Lb_GPIO_Port, Lb_Pin);
+		int Ra = HAL_GPIO_ReadPin(Ra_GPIO_Port, Ra_Pin);
+		int Rb = HAL_GPIO_ReadPin(Rb_GPIO_Port, Rb_Pin);
+		printf("Lb = %d\n", Lb);
+		printf("Rb = %d\n", Rb);
+		if (Lb == GPIO_PIN_RESET) {
+			printf("LLLL\n");
+		}
+		if (Rb == GPIO_PIN_RESET) {
+			printf("RRRR\n");
+		}
+		HAL_Delay(500);
+		*/
+		
+		//MPU_Get_Accelerometer();
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -110,10 +179,13 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -122,12 +194,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
